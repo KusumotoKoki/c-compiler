@@ -23,6 +23,9 @@ struct					Token
 	char *str;      // トークン文字列
 };
 
+// 入力プログラム
+char					*user_input;
+
 // 現在着目しているトークン
 Token					*token;
 
@@ -33,6 +36,22 @@ void	error(char *fmt, ...)
 	va_list	ap;
 
 	va_start(ap, fmt);
+	vfprintf(stderr, fmt, ap);
+	fprintf(stderr, "\n");
+	exit(1);
+}
+
+// エラー箇所を報告する
+void	error_at(char *loc, char *fmt, ...)
+{
+	va_list	ap;
+	int		pos;
+
+	va_start(ap, fmt);
+	pos = loc - user_input;
+	fprintf(stderr, "%s\n", user_input);
+	fprintf(stderr, "%*s", pos, " "); // pos個の空白を出力
+	fprintf(stderr, "^ ");
 	vfprintf(stderr, fmt, ap);
 	fprintf(stderr, "\n");
 	exit(1);
@@ -52,7 +71,7 @@ bool	consume(char op)
 void	expect(char op)
 {
 	if (token->kind != TK_RESERVED || token->str[0] != op)
-		error("'%c'ではありません", op);
+		error_at(token->str, "expected '%c'", op);
 	token = token->next;
 }
 
@@ -63,7 +82,7 @@ int	expect_number(void)
 	int	val;
 
 	if (token->kind != TK_NUM)
-		error("数ではありません");
+		error_at(token->str, "expected a number");
 	val = token->val;
 	token = token->next;
 	return (val);
@@ -86,12 +105,14 @@ Token	*new_token(TokenKind kind, Token *cur, char *str)
 	return (tok);
 }
 
-// 入力文字列pをトークナイズしてそれを返す
-Token	*tokenize(char *p)
+// user_inputをトークナイズしてそれを返す
+Token	*tokenize(void)
 {
+	char	*p;
 	Token	head;
 	Token	*cur;
 
+	p = user_input;
 	head.next = NULL;
 	cur = &head;
 	while (*p)
@@ -113,7 +134,7 @@ Token	*tokenize(char *p)
 			cur->val = strtol(p, &p, 10);
 			continue ;
 		}
-		error("トークナイズできません");
+		error_at(p, "invalid token");
 	}
 	new_token(TK_EOF, cur, p);
 	return (head.next);
@@ -123,11 +144,12 @@ int	main(int argc, char *argv[])
 {
 	if (argc != 2)
 	{
-		fprintf(stderr, "引数の個数は1つにしてください\n");
+		error("%s: invalid number of arguments", argv[0]);
 		return (1);
 	}
 	// トークナイズ
-	token = tokenize(argv[1]);
+	user_input = argv[1];
+	token = tokenize();
 	printf(".intel_syntax noprefix\n");
 	printf(".globl main\n");
 	printf("main:\n");
