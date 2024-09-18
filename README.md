@@ -5,6 +5,8 @@
 - [ ] [低レイヤを知りたい人のためのCコンパイラ作成入門](https://www.sigbus.info/compilerbook) を読んで実装する
 	- [x] Chap01: [はじめに](https://www.sigbus.info/compilerbook#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB)
 	- [x] Chap02: [機械語とアセンブラ](https://www.sigbus.info/compilerbook#%E6%A9%9F%E6%A2%B0%E8%AA%9E%E3%81%A8%E3%82%A2%E3%82%BB%E3%83%B3%E3%83%96%E3%83%A9)
+	- [ ] Chap03: [電卓レベルの言語の作成](https://www.sigbus.info/compilerbook#%E9%9B%BB%E5%8D%93%E3%83%AC%E3%83%99%E3%83%AB%E3%81%AE%E8%A8%80%E8%AA%9E%E3%81%AE%E4%BD%9C%E6%88%90)
+	- [ ] 続き
 
 ## Environment
 
@@ -12,6 +14,14 @@
 	- Docker インストール済み
 
 ## Log
+
+### 2024-09-19: コンパイラ作成環境`lagucc/`の作成．それに合わせてShellスクリプト`docker-run.sh`の修正
+
+```bash
+docker run -it --rm -v .:/c-compiler -w /c-compiler/lagucc compilerbook
+```
+
+### 2024-09-19: Chap01, Chap02 done
 
 ### 2024-09-19: 作成したDocker環境に簡単に入るためのShellスクリプトを作成
 

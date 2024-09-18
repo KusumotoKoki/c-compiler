@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker run -it --rm -v .:/c-compiler -w /c-compiler compilerbook
+docker run -it --rm -v .:/c-compiler -w /c-compiler/lagucc compilerbook
