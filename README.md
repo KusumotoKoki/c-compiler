@@ -3,8 +3,8 @@
 ## Todo
 
 - [ ] [低レイヤを知りたい人のためのCコンパイラ作成入門](https://www.sigbus.info/compilerbook) を読んで実装する
-	- [x] [はじめに](https://www.sigbus.info/compilerbook#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB)
-	- [ ]
+	- [x] Chap01: [はじめに](https://www.sigbus.info/compilerbook#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB)
+	- [x] Chap02: [機械語とアセンブラ](https://www.sigbus.info/compilerbook#%E6%A9%9F%E6%A2%B0%E8%AA%9E%E3%81%A8%E3%82%A2%E3%82%BB%E3%83%B3%E3%83%96%E3%83%A9)
 
 ## Environment
 
@@ -23,6 +23,7 @@ docker run -it --rm -v .:/c-compiler -w /c-compiler compilerbook
 ### 2024-09-19: Dockerを使ったLinux環境（x86-64）を作成
 
 Dockerfileを次のように作成した
+
 `linux/amd64`アーキテクチャを指定した
 
 ```Dockerfile
