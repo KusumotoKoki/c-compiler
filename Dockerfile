@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM --platform=linux/amd64 ubuntu:latest
 
 # Update package lists and install necessary packages in one step
 RUN apt-get update && \

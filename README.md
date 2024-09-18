@@ -13,22 +13,20 @@
 
 ## Log
 
-### 2024-09-18
+### 2024-09-19: 作成したDocker環境に簡単に入るためのShellスクリプトを作成
 
-#### このリポジトリを作成
-
-#### Dockerを使ったLinux環境を作成
-
-compilerbookの通りに次を実行した．
-
+次を毎回入力するのが面倒くさいので．
 ```bash
-$ docker build -t compilerbook https://www.sigbus.info/compilerbook/Dockerfile
+docker run -it --rm -v .:/c-compiler -w /c-compiler compilerbook
 ```
 
-エラーが出てしまったので，Dockerfileを次のように作成した
+### 2024-09-19: Dockerを使ったLinux環境（x86-64）を作成
+
+Dockerfileを次のように作成した
+`linux/amd64`アーキテクチャを指定した
 
 ```Dockerfile
-FROM ubuntu:latest
+FROM --platform=linux/amd64 ubuntu:latest
 
 # Update package lists and install necessary packages in one step
 RUN apt-get update && \
@@ -51,6 +49,7 @@ Docker.app を再起動して，次を実行した．
 $  docker build -t compilerbook .
 ```
 
+### 2024-09-18: このリポジトリを作成
 
 
 
